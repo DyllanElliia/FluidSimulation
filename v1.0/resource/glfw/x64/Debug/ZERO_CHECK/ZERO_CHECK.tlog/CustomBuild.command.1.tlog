@@ -1,0 +1,10 @@
+^D:\LEARNOPENGL\LEARNINGOPENGL\RESOURCE\GLFW\CMAKEFILES\D59FAC1B1136B3B092818EB6D296703D\GENERATE.STAMP.RULE
+setlocal
+D:\CMake\cmake-3.16.2-win64-x64\cmake-3.16.2-win64-x64\bin\cmake.exe -SD:/LearnOpenGL/LearningOpenGL/resource/glfw-3.3.1/glfw-3.3.1 -BD:/LearnOpenGL/LearningOpenGL/resource/glfw --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/LearnOpenGL/LearningOpenGL/resource/glfw/GLFW.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
