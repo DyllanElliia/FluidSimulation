@@ -32,6 +32,7 @@ FluidSystem::FluidSystem()
 
 FluidSystem::~FluidSystem()
 {}
+
 //构造流体中的点
 void FluidSystem::_addFluidVolume(const Box& fluidBox, float spacing)
 {
@@ -46,6 +47,7 @@ void FluidSystem::_addFluidVolume(const Box& fluidBox, float spacing)
                 p->pos = glm::vec3(x, y, z);
             }
 }
+
 void FluidSystem::_addFluidVolume(const Box& fluidBox, float spacing, glm::vec3 velocity)
 {
     //按照步长为spacing进行空间遍历；
@@ -60,6 +62,7 @@ void FluidSystem::_addFluidVolume(const Box& fluidBox, float spacing, glm::vec3 
                 p->velocity = velocity;
             }
 }
+
 bool FluidSystem::addPoint(glm::vec3 min, glm::vec3 max, glm::vec3 originVelocity)
 {
     if (f_PointBuffer.getPointNumber() >= ELEM_MAX)
@@ -73,6 +76,7 @@ bool FluidSystem::addPoint(glm::vec3 min, glm::vec3 max, glm::vec3 originVelocit
     }
     return true;
 }
+
 void FluidSystem::_init(unsigned short maxPointCounts, const Box& wallBox, const Box& initFluidBox, const glm::vec3& gravity)
 {
     //初始化缓冲，构造缓冲区；
@@ -159,10 +163,17 @@ void FluidSystem::_computerPressure()
     }
 }
 
-void FluidSystem::_computerForce()
+int max = 0;
+#define thread_max 25
+
+void FluidSystem::_computerForce(int i)
 {
+    int begin = int(float(i) / float(thread_max) * max);
+    int end = int(float(i + 1) / float(thread_max) * max);
+    //printf("max:%6d  CF:min: %6d  CF:min: %6d\n", max, begin, end);
     //遍历所有点，对每一个点的粘度进行计算；
-    for (unsigned int i = 0, limit = f_PointBuffer.getPointNumber(); i < limit; i++)
+    //for (unsigned int i = 0, limit = f_PointBuffer.getPointNumber(); i < limit; i++)
+    for (unsigned int i = begin; i < end; i++)
     {
         //获取当前索引值i对应的粒子；
         Point* pi = f_PointBuffer.getPoint(i);
@@ -206,7 +217,11 @@ void FluidSystem::_computerForce()
     }
 }
 
-void FluidSystem::_advance() {
+//std::mutex posDataMU;
+
+void FluidSystem::_advance(int i) {
+    int begin = int(float(i) / float(thread_max) * max);
+    int end = int(float(i+1) / float(thread_max) * max);
     //设置时间间隔；
     float deltaTime = 0.001;
     //最大速度的平方；
@@ -215,7 +230,8 @@ void FluidSystem::_advance() {
     //若模拟烟雾、海浪和火焰等粒子数量会发生变化的情况，则必须清空；
     //posData.clear();
     //遍历点，逐一处理；
-    for (unsigned int i = 0, limit = f_PointBuffer.getPointNumber(); i < limit; i++)
+    //for (unsigned int i = 0, limit = f_PointBuffer.getPointNumber(); i < limit; i++)
+    for (unsigned int i = begin; i < end; i++)
     {
         //逐一获得点；
         Point* p = f_PointBuffer.getPoint(i);
@@ -303,14 +319,56 @@ void FluidSystem::_advance() {
     }
 }
 
+std::mutex mtx;             // 全局互斥锁
+std::condition_variable cr; // 全局条件变量
+std::mutex countM;
+int count = 0;
+
+void FluidSystem::_comForce_And_advance(int i)
+{
+    std::unique_lock<std::mutex> lck(mtx);
+    //cr.wait(lck);
+    this->_computerForce(i);
+    //同步锁，避免部分进程先其他进程进入位移计算；
+    //导致其他进程计算加速度时读取了错误数据；
+    countM.lock();
+    if ((++count) != thread_max)
+    {
+        countM.unlock();
+        cr.wait(lck);
+    }
+    else
+    {
+        countM.unlock();
+        cr.notify_all();
+    }
+    this->_advance(i);
+}
+
 void FluidSystem::tick()
 {
+    count = 0;
+    std::thread threads[thread_max];
+    max = f_PointBuffer.getPointNumber();
     // 每帧刷新粒子位置；
     f_GridContainer.insertPoint(&f_PointBuffer);
     // 压强计算，并构建领接表；
     _computerPressure();
     // 计算合力；
-    _computerForce();
+    //for (int i = 0; i < thread_max; i++)
+    //    threads[i] = std::thread(&FluidSystem::_computerForce, this, i);
+    //for (auto& t : threads)
+    //    t.join();
+    //_computerForce();
     // 加速度计算与边界控制；
-    _advance();
+    //for (int i = 0; i < thread_max; i++)
+    //    threads[i] = std::thread(&FluidSystem::_advance, this, i);
+    //for (auto& t : threads)
+    //    t.join();
+    //_advance();
+    for (int i = 0; i < thread_max; i++)
+        threads[i] = std::thread(&FluidSystem::_comForce_And_advance, this, i);
+    //cr.notify_all();
+    for (auto& t : threads)
+        t.join();
 }

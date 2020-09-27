@@ -78,6 +78,10 @@
     <IncludePath>..\resource\glfw-3.3.1.bin.WIN32\include;..\resource\glad\include;..\resource\glm;..\resource\stb_master;$(IncludePath)</IncludePath>
     <LibraryPath>..\resource\glfw-3.3.1.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\resource\glfw-3.3.1.bin.WIN32\include;..\resource\glad\include;..\resource\glm;..\resource\stb_master;$(IncludePath)</IncludePath>
+    <LibraryPath>..\resource\glfw-3.3.1.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

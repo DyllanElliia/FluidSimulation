@@ -9,6 +9,10 @@
 
 #include <vector>
 
+#include <thread>
+#include <mutex>
+#include <chrono>
+
 #include "PointBuffer.h"
 #include "Grid.h"
 #include "NeighborTable.h"
@@ -48,9 +52,11 @@ private:
     //计算密度，压力以及相邻关系
     void _computerPressure();
     //计算加速度
-    void _computerForce();
+    void _computerForce(int i);
     //移动粒子
-    void _advance();
+    void _advance(int i);
+    //多线程集合
+    void _comForce_And_advance(int i);
     //创建初始液体块
     void _addFluidVolume(const Box& fluidBox, float spacing);
     void _addFluidVolume(const Box& fluidBox, float spacing, glm::vec3 velocity);

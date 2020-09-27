@@ -48,7 +48,7 @@
     <ClCompile Include="Materal.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="McRxFace.cpp">
+    <ClCompile Include="MarchingCubes.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +86,7 @@
     <ClInclude Include="TriangleTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="McRxFace.h">
+    <ClInclude Include="MarchingCubes.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

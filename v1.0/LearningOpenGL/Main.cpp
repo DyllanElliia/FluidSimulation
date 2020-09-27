@@ -5,10 +5,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_master/stb_image.h>
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <stb_master/stb_image_write.h>
+//#define STB_IMAGE_IMPLEMENTATION
+//#include <stb_master/stb_image.h>
+//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//#include <stb_master/stb_image_write.h>
 
 #include <iostream>
 #include <string>
@@ -119,9 +119,9 @@ int main()
 
     FluidSystem fluid;
 
-    fluid.init( 15000, 
+    fluid.init( 20000, 
                 glm::vec3(-20, -20, -20), glm::vec3(20, 20, 20), 
-                glm::vec3(-15, -10, -15), glm::vec3(5, 20, 5), 
+                glm::vec3(-15, -10, -15), glm::vec3(10, 20, 10), 
                 glm::vec3(0, -10, 0));
     //fluid.init( 15000,
     //            glm::vec3(-20, -20, -20), glm::vec3(20, 20, 20),
@@ -193,6 +193,7 @@ int main()
         //model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO2);
+        glPointSize(2);
         glDrawArrays(GL_POINTS, 0, fluid.getPointCounts());
         glBindVertexArray(0);
         // Swap the buffers
@@ -253,7 +254,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
-
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
