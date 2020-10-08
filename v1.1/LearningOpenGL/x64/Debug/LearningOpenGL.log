@@ -1,0 +1,15 @@
+﻿  Main.cpp
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Materal.h(25,37): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Materal.h(35,21): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(126,39): warning C4305: “参数”: 从“double”到“GLfloat”截断
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(128,39): warning C4305: “参数”: 从“double”到“GLfloat”截断
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(218,31): warning C4018: “<”: 有符号/无符号不匹配
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(256,30): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(359,17): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(360,17): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(364,21): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(365,21): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(367,13): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(368,13): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+D:\program\vcProjext\FluidSimulation\v1.1\LearningOpenGL\Main.cpp(375,31): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+  LearningOpenGL.vcxproj -> D:\program\vcProjext\FluidSimulation\v1.1\x64\Debug\FluidSimulation.exe
