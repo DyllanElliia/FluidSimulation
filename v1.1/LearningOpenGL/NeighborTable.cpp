@@ -120,7 +120,8 @@ void NeighborTable::_growDataBuf(unsigned int needSize)
 
 //getNeighborCounts的一般形式；
 //pointIndex是点的索引，index是该点邻接表内的邻接索引，获取的neighborIndex为该邻接表的默认索引；
-void NeighborTable::getNeighborInfo(unsigned short pointIndex, int index, unsigned short& neighborIndex, float& neighborDistance) {
+inline void NeighborTable::getNeighborInfo(unsigned short pointIndex, int index, unsigned short& neighborIndex, float& neighborDistance)
+{
     PointExtraData neighData = n_PointExtraData[pointIndex];
     unsigned short* indexBuf = (unsigned short*)(n_NeighborDataBuf + neighData.neighborDataOffset);
     float* distanceBuf = (float*)(n_NeighborDataBuf + neighData.neighborDataOffset + sizeof(unsigned short) * neighData.neighborCounts);
