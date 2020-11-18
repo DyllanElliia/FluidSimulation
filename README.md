@@ -29,6 +29,7 @@
 $$
 \rho\left( \overrightarrow{r_{i}} \right)\frac{\text{dV}}{\text{dt}} = \rho\left( \overrightarrow{r_{i}} \right)\overrightarrow{g} - \nabla p(\overrightarrow{r_{i}}) + \mu\nabla^{2}\overrightarrow{v}(\overrightarrow{r_{i}})
 $$
+
 若完全用它来进行模拟，这必然是一个不可能完成的计算量，所以伴随延伸的就是一系列用于近似模拟的算法与模型。其中最常用，也是最逼真的一类算法就是本作品实现的SPH方法。
 
 ## SPH方法简介
