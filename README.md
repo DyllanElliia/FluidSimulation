@@ -2,9 +2,9 @@
 
 ---
 
-**摘 要：**围绕模拟流体的目的，制作出了基于Monaghan SPH（smoothed particle hydrodynamics，光滑粒子流体动力学）方法的流体粒子模拟器通用模板。基于C++面向对象编程、GLM数学库和OpenGL，实现了一个简单的流体粒子系统，可以根据设置的网格参数和自定义添加的材质参数，高效并发实时模拟流体的形态变化，同时实现多种流体的交互模拟。
+**摘 要：** 围绕模拟流体的目的，制作出了基于Monaghan SPH（smoothed particle hydrodynamics，光滑粒子流体动力学）方法的流体粒子模拟器通用模板。基于C++面向对象编程、GLM数学库和OpenGL，实现了一个简单的流体粒子系统，可以根据设置的网格参数和自定义添加的材质参数，高效并发实时模拟流体的形态变化，同时实现多种流体的交互模拟。
 
-**关键词：**流体模拟；流体交互；流体动力学；Navier-Stokes方程；SPH；OpenGL；GLM
+**关键词：** 流体模拟；流体交互；流体动力学；Navier-Stokes方程；SPH；OpenGL；GLM
 
 ---
 
@@ -26,8 +26,9 @@
 
 而基于真实物理方程的流体模拟是其三个基本方法中的一种，也是现在图形学发展的一个方向，其核心也就是流体方程(Navier-Stokes方程, 也称N-S方程)：
 
-$$\rho\left( \overrightarrow{r_{i}} \right)\frac{\text{dV}}{\text{dt}} = \rho\left( \overrightarrow{r_{i}} \right)\overrightarrow{g} - \nabla p(\overrightarrow{r_{i}}) + \mu\nabla^{2}\overrightarrow{v}(\overrightarrow{r_{i}})$$
-
+$$
+\rho\left( \overrightarrow{r_{i}} \right)\frac{\text{dV}}{\text{dt}} = \rho\left( \overrightarrow{r_{i}} \right)\overrightarrow{g} - \nabla p(\overrightarrow{r_{i}}) + \mu\nabla^{2}\overrightarrow{v}(\overrightarrow{r_{i}})
+$$
 若完全用它来进行模拟，这必然是一个不可能完成的计算量，所以伴随延伸的就是一系列用于近似模拟的算法与模型。其中最常用，也是最逼真的一类算法就是本作品实现的SPH方法。
 
 ## SPH方法简介
