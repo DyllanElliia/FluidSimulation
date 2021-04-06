@@ -87,8 +87,7 @@ SPH方法中，对光滑核函数(Smoothing Kernel Function)的使用也是该�
 流体模拟需要提供一个流体的生存区间，即流体盒，保证流体只在盒内流动。既然有了初始化，就要额外提供一个重置函数，方便内存回收。
 
 ~~~c++
-void init
-(   
+void init(   
     unsigned short maxPointCounts,
     const glm::vec3& wallBox_min,
     const glm::vec3& wallBox_max,
@@ -238,14 +237,14 @@ GLfloat *getPosData() { return &(posData[0]); }
             5000.f,
             glm::vec3(0.5, 0.5, 1)  //蓝色
         )
-    );// 重油，比水更重，粘度更大，在标准大气压下，相对而言不稳定
+    );// 重油，比水更重，粘度更大，在标准大气压下，相对而言比水不稳定
     MateralIndex L_Oil = fluid.addMateral(
         new Materal(
             30.0f,
             200.f,
             glm::vec3(0.5, 1, 0.5)  //绿色
         )
-    );// 轻油，比水更轻，粘度更大，在标准大气压下，相对而言更稳定
+    );// 轻油，比水更轻，粘度更大，在标准大气压下，相对而言比水更稳定
     MateralIndex L_Water = fluid.addMateral(
         new Materal(
             1.0f,
@@ -287,16 +286,17 @@ GLfloat *getPosData() { return &(posData[0]); }
     ![image-20201118181904816](README.assets/image-20201118181904816.png) ![image-20201118181908064](README.assets/image-20201118181908064.png)
 
     ~~~c++
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window))
+    {
         fluid.addPointTick(glm::vec3(-20, -4, 4), glm::vec3(-20, 0, 8), glm::vec3(2, 0, 0), L_Water);
         fluid.addPointTick(glm::vec3(-20, -4, -8), glm::vec3(-20, 0, -4), glm::vec3(2, 0, 0), L_Oil);
         fluid.addPointTick(glm::vec3(-20, 4, -4), glm::vec3(-20, 8, 0), glm::vec3(2, 0, 0), H_Oil);
         fluid.addPointTick(glm::vec3(-20, -4, -4), glm::vec3(-20, 0, 0), glm::vec3(2, 0, 0));
     }
-    ~~~
-
-    ![image-20201118183122392](README.assets/image-20201118183122392.png) ![image-20201118183125432](README.assets/image-20201118183125432.png)
-
+~~~
+    
+![image-20201118183122392](README.assets/image-20201118183122392.png) ![image-20201118183125432](README.assets/image-20201118183125432.png)
+    
     ![image-20201118183129935](README.assets/image-20201118183129935.png) ![image-20201118183133137](README.assets/image-20201118183133137.png)
 
 
