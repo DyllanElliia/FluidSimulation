@@ -2,9 +2,9 @@
 
 ---
 
-**Summary: **A generic template for a fluid particle simulator based on the Monaghan SPH (smoothed particle hydrodynamics) method is produced for the purpose of simulating fluids. Based on C++ object-oriented programming, the GLM mathematical library and OpenGL, it is possible to simulate fluids efficiently and concurrently in real time based on the set mesh and custom added materials, as well as to realize the interactive simulation of multiple fluids.
+**Summary**: A generic template for a fluid particle simulator based on the Monaghan SPH (smoothed particle hydrodynamics) method is produced for the purpose of simulating fluids. Based on C++ object-oriented programming, the GLM mathematical library and OpenGL, it is possible to simulate fluids efficiently and concurrently in real time based on the set mesh and custom added materials, as well as to realize the interactive simulation of multiple fluids.
 
-**KeyWords: ** Fluid Simulation; Fluid Interaction; Hydrodynamics;Navier-Stokes equation; Monaghan's SPH
+**KeyWords**: Fluid Simulation; Fluid Interaction; Hydrodynamics;Navier-Stokes equation; Monaghan's SPH
 
 ---
 
