@@ -85,7 +85,7 @@ Add a material, return the index of the material.
 MateralIndex addMateral(Materal* newMateral);
 ~~~
 
-其中：
+Where:
 
 -   **newMateral**: Build a new material through `new`;
 
